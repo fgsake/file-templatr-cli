@@ -3,11 +3,11 @@
   "private": "true",
   "version": "1.0.0",
   "description": "Utility to create files / folders from a pre-defined template within your project directory.",
-  "main": "./bin/index.js",
+  "main": "bin/index.js",
   "author": "Eric Heaton <eric@fgsake.org>",
   "license": "MIT",
   "bin": {
-    "file-templatr": "./bin/index.js"
+    "file-templatr": "bin/index.js"
   },
   "scripts": {
     "start": "nodemon ./src/index.ts -- -t react-ts-component -p ./test-output -f --watch --debug \"My Test Component\"",
