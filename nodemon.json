@@ -1,0 +1,15 @@
+{
+  "verbose": false,
+  "watch": ["src/**/*.ts"],
+  "ignore": [
+    "src/**/*.spec.ts",
+    "bin/",
+    ".git",
+    "node_modules/",
+    "coverage/",
+    "test-output/"
+  ],
+  "execMap": {
+    "ts": "yarn build & ts-node"
+  }
+}
