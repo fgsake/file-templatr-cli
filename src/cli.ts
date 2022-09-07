@@ -4,20 +4,19 @@ import { Argument, Command, Option } from 'commander';
 import 'dotenv/config';
 import findRoot from 'find-root';
 import fs from 'fs-extra';
-import path, { basename } from 'path';
+import path from 'path';
 import { totalist } from 'totalist/sync';
+
 import { FOLDER_TEMPLATE_DIR_NAME } from './constants';
 
 const CWD: string = process.env.INIT_CWD || process.cwd();
-const PWD: string = process.env.PWD || process.cwd();
-const PACKAGE_DIR: string = path.resolve(__dirname, '../');
 const PROJECT_DIR: string | undefined = findRoot(CWD);
 const TEMPLATE_BASE_DIR: string = `${PROJECT_DIR}/${FOLDER_TEMPLATE_DIR_NAME}`;
 
 
 if (!fs.existsSync(TEMPLATE_BASE_DIR)) {
-  console.log('index :: No Folder Template Dir Exists');
-  console.log('index :: CWD');
+  console.log('file-templatr :: No Folder Template Dir Exists');
+  console.log('file-templatr :: CWD');
 
   process.exit(1);
 }
@@ -67,19 +66,19 @@ const program: Command = new Command()
 
 
     if (!fs.existsSync(TEMPLATE_DIR)) {
-      console.log(`index :: Could not find Template - ${options.template}`);
+      console.log(`file-templatr :: Could not find Template - ${options.template}`);
       process.exit(1);
     }
 
     if (!fs.existsSync(TARGET_BASE_DIR)) {
-      console.log(`index :: Can not find target path - ${options.path}`);
+      console.log(`file-templatr :: Can not find target path - ${options.path}`);
       process.exit(1);
     }
 
     const TARGET_DIR: string = `${TARGET_BASE_DIR}/${paramCase(targetName)}`;
 
     if (fs.existsSync(TARGET_DIR) && !options.force) {
-      console.log(`index :: Target folder already exists - ${TARGET_DIR}`);
+      console.log(`file-templatr :: Target folder already exists - ${TARGET_DIR}`);
       process.exit(1);
     }
 
@@ -104,7 +103,7 @@ const program: Command = new Command()
         contents
           .replace(/__ENV_FS_NAME_PARAMCASE/g, FS_NAME_PARAM)
           .replace(/__ENV_FS_NAME_PASCALCASE/g, FS_NAME_PASCAL)
-          .replace(/__ENV_FS_COMPONENT_PARENT_DIR/g, basename(TARGET_BASE_DIR))
+          .replace(/__ENV_FS_COMPONENT_PARENT_DIR/g, path.basename(TARGET_BASE_DIR))
       );
     });
   });
