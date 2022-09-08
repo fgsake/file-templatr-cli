@@ -12,7 +12,8 @@
     "start": "nodemon ./src/index.ts -- -t react-ts-component -p ./test-output -f --watch --debug \"My Test Component\"",
     "create": "npm run build && npm run test",
     "build": "tsc --noEmit false -p .",
-    "reset": "rm -rf ./node_modules ./package-lock.json",
+    "reset": "rm -rf ./node_modules",
+    "reset-all": "rm -rf ./node_modules ./package-lock.json",
     "refresh": "npm run reset && npm install",
     "postinstall": "npm run build"
   },
