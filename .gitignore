@@ -10,7 +10,6 @@
 
 # build folders
 /out/
-/bin/
 /dest/
 
 # production
