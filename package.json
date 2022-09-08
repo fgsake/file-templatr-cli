@@ -1,6 +1,6 @@
 {
   "name": "@fgsake/file-templatr-cli",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Utility to create files / folders from a pre-defined template within your project directory.",
   "author": "Eric Heaton <eric@fgsake.org>",
   "license": "MIT",
