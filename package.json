@@ -4,14 +4,14 @@
   "description": "Utility to create files / folders from a pre-defined template within your project directory.",
   "author": "Eric Heaton <eric@fgsake.org>",
   "license": "MIT",
-  "main": "bin/cli.js",
+  "main": "dist/bin/cli.js",
   "bin": {
-    "file-templatr": "./bin/cli.js"
+    "file-templatr": "./dist/bin/cli.js"
   },
   "scripts": {
     "start": "nodemon ./src/*.ts -- -t react-ts-component -p ./test-output -f --watch --debug \"My Test Component\"",
     "create": "yarn build && yarn test",
-    "clean": "rm -rf ./bin && mkdir -p ./bin",
+    "clean": "rm -rf ./dist && mkdir -p ./dist",
     "build": "yarn clean && tsc --noEmit false -p .",
     "build-release": "yarn clean && tsc",
     "reset": "rm -rf ./node_modules ./bin ./dist",

@@ -3,7 +3,7 @@
     "module": "CommonJS",
     "target": "ES6",
     "sourceMap": true,
-    "outDir": "./bin/",
+    "outDir": "./dist/",
     "lib": ["es2017", "es7", "es6", "DOM"],
     "baseUrl": ".",
     "resolveJsonModule": true,
@@ -22,13 +22,12 @@
   },
   "ts-node": {
     "transpileOnly": false,
-    "files": true
+    "files": true,
   },
   "include": ["src/**/*"],
   "exclude": [
     "node_modules/*",
     "dist/*",
-    "bin/*",
     "scripts/*",
     "examples/*",
     "test-output"

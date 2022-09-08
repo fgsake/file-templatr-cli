@@ -7,7 +7,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import { totalist } from 'totalist/sync';
 
-import { FOLDER_TEMPLATE_DIR_NAME } from './constants';
+import { FOLDER_TEMPLATE_DIR_NAME } from "../constants";
 
 const CWD: string = process.env.INIT_CWD || process.cwd();
 const PROJECT_DIR: string | undefined = findRoot(CWD);
