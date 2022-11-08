@@ -45,10 +45,13 @@ const program = new commander_1.Command()
     .action((targetName) => {
     // console.log('index :: componentName -', componentName);
     const options = program.opts();
-    const TARGET_BASE_DIR = path_1.default.resolve(CWD, options.path);
+    const targetParts = targetName.split('/');
+    const fileName = targetParts.pop();
+    const targetPath = targetParts.join('/');
+    const TARGET_BASE_DIR = path_1.default.resolve(CWD, options.path, targetParts.join('/'));
     const TEMPLATE_DIR = path_1.default.resolve(TEMPLATE_BASE_DIR, options.template);
-    const FS_NAME_PARAM = (0, change_case_1.paramCase)(targetName);
-    const FS_NAME_PASCAL = (0, change_case_1.pascalCase)(targetName);
+    const FS_NAME_PARAM = (0, change_case_1.paramCase)(fileName);
+    const FS_NAME_PASCAL = (0, change_case_1.pascalCase)(fileName);
     console.log('file-templatr :: TARGET_BASE_DIR   -', TARGET_BASE_DIR);
     console.log('file-templatr :: TEMPLATE_DIR      -', TEMPLATE_DIR);
     console.log('file-templatr :: FS_NAME_PARAM     -', FS_NAME_PARAM);
@@ -58,15 +61,16 @@ const program = new commander_1.Command()
         console.log(`file-templatr :: Could not find Template - ${options.template}`);
         process.exit(1);
     }
-    if (!fs_extra_1.default.existsSync(TARGET_BASE_DIR)) {
+    if (!fs_extra_1.default.existsSync(options.path)) {
         console.log(`file-templatr :: Can not find target path - ${options.path}`);
         process.exit(1);
     }
-    const TARGET_DIR = `${TARGET_BASE_DIR}/${(0, change_case_1.paramCase)(targetName)}`;
+    const TARGET_DIR = `${TARGET_BASE_DIR}/${FS_NAME_PARAM}`;
     if (fs_extra_1.default.existsSync(TARGET_DIR) && !options.force) {
         console.log(`file-templatr :: Target folder already exists - ${TARGET_DIR}`);
         process.exit(1);
     }
+    fs_extra_1.default.mkdirSync(TARGET_DIR, { recursive: true });
     fs_extra_1.default.copySync(TEMPLATE_DIR, TARGET_DIR);
     // const files: Array<Entry> = scandirSync(TARGET_DIR);
     (0, sync_1.totalist)(TARGET_DIR, (relPath, absPath) => __awaiter(void 0, void 0, void 0, function* () {

@@ -49,10 +49,14 @@ const program: Command = new Command()
     // console.log('index :: componentName -', componentName);
     const options = program.opts();
 
-    const TARGET_BASE_DIR: string = path.resolve(CWD, options.path);
+    const targetParts = targetName.split('/');
+    const fileName = targetParts.pop();
+    const targetPath = targetParts.join('/');
+
+    const TARGET_BASE_DIR: string = path.resolve(CWD, options.path, targetParts.join('/'));
     const TEMPLATE_DIR: string = path.resolve(TEMPLATE_BASE_DIR, options.template)
-    const FS_NAME_PARAM: string = paramCase(targetName);
-    const FS_NAME_PASCAL: string = pascalCase(targetName);
+    const FS_NAME_PARAM: string = paramCase(fileName);
+    const FS_NAME_PASCAL: string = pascalCase(fileName);
 
 
 
@@ -70,18 +74,19 @@ const program: Command = new Command()
       process.exit(1);
     }
 
-    if (!fs.existsSync(TARGET_BASE_DIR)) {
+    if (!fs.existsSync(options.path)) {
       console.log(`file-templatr :: Can not find target path - ${options.path}`);
       process.exit(1);
     }
 
-    const TARGET_DIR: string = `${TARGET_BASE_DIR}/${paramCase(targetName)}`;
+    const TARGET_DIR: string = `${TARGET_BASE_DIR}/${FS_NAME_PARAM}`;
 
     if (fs.existsSync(TARGET_DIR) && !options.force) {
       console.log(`file-templatr :: Target folder already exists - ${TARGET_DIR}`);
       process.exit(1);
     }
 
+    fs.mkdirSync(TARGET_DIR, { recursive: true })
     fs.copySync(TEMPLATE_DIR, TARGET_DIR);
 
     // const files: Array<Entry> = scandirSync(TARGET_DIR);
